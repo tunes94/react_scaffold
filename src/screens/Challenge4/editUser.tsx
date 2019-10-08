@@ -29,21 +29,21 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
     };
   }
 
+  
+
   componentDidMount() {
-    const userSelected: number = this.props.match.params.user_id;
-    const { users } = this.props;
-
-    let usersCopy = [...this.props.users];
-    let filteredUser: User = usersCopy.find(
-      user => user.user_id === userSelected
-    );
-
-    this.setState({
-      user_name: filteredUser.user_name,
-      address: filteredUser.address,
-      age: filteredUser.age,
-      users: usersCopy
-    });
+    // const userSelected: number = this.props.match.params.user_id;
+    // const { users } = this.props;
+    // let usersCopy = [...this.props.users];
+    // let filteredUser: User = usersCopy.find(
+    //   user => user.user_id === userSelected
+    // );
+    // this.setState({
+    //   user_name: filteredUser.user_name,
+    //   address: filteredUser.address,
+    //   age: filteredUser.age,
+    //   users: usersCopy
+    // });
   }
 
   render(): JSX.Element {

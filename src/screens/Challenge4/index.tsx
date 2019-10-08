@@ -3,6 +3,7 @@ import { User } from "../../store/Challenge4/reducer";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 
 export interface Challenge4Props {
   history?: any;
@@ -51,12 +52,24 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
                       <td>{user.age}</td>
 
                       <td>
-                        <button
-                          onClick={() =>
-                            this.props.history.push(
-                              `/challenge4/${user.user_id}/edit`
-                            )
-                          }
+                        <Link
+                          to={{
+                            pathname: "/challenge4/users/edit",
+                            state: {
+                              user: user
+                            }
+                          }}
+                          className="btn btn-dark"
+                        >
+                          Edit
+                        </Link>
+
+                        {/* <button
+                          // onClick={() =>
+                          //   this.props.history.push(
+                          //     `/challenge4/${user.user_id}/edit`
+                          //   )
+                          // }
                           // onClick={(): void => {
                           //   try {
                           //     editUser && editUser(user.user_name, user.user.user_id);
@@ -67,7 +80,7 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
                           className="btn btn-dark col-3 ml-5"
                         >
                           Edit
-                        </button>
+                        </button> */}
 
                         <button
                           // onClick={(): void => {
@@ -94,8 +107,8 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
     );
   }
 }
-
-const mapStateToProps = (state?: any) => ({
+// state?
+const mapStateToProps = (state: any) => ({
   users: state.challenge4Reducer.users
 });
 

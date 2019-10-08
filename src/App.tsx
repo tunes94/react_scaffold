@@ -20,7 +20,7 @@ import EditUser from "./screens/Challenge4/editUser";
 const appReducers = combineReducers({
   challenge35Reducer: challenge35Reducer,
   challenge4Reducer: challenge4Reducer,
-  
+
   field: FirstScreenReducer
 });
 
@@ -82,7 +82,7 @@ class App extends React.Component {
                       </NavLink>
                       <NavLink
                         className="dropdown-item text-black"
-                        to="/challenge4/new"
+                        to="/challenge4/user/new"
                       >
                         New User
                       </NavLink>
@@ -99,9 +99,14 @@ class App extends React.Component {
                 <Route exact path="/challenge35" component={Challenge35} />
                 <Route exact path="/challenge35/new" component={CreateToDo} />
                 <Route exact path="/challenge4" component={Challenge4} />
-                <Route exact path="/challenge4/new" component={CreateUser} />
                 <Route
-                  path="/challenge4/:user_id/edit"
+                  exact
+                  path="/challenge4/user/new"
+                  component={CreateUser}
+                />
+                {/* /challenge4/:user_id/edit */}
+                <Route
+                  path="/challenge4/users/edit"
                   exact
                   component={EditUser}
                 />
