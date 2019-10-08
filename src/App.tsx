@@ -12,11 +12,15 @@ import Challenge35 from "./screens/Challenge35";
 import CreateToDo from "./screens/Challenge35/createTodo";
 import Challenge4 from "./screens/Challenge4";
 import challenge35Reducer from "./store/Challenge35/reducer";
+import challenge4Reducer from "./store/Challenge4/reducer";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-
+import CreateUser from "./screens/Challenge4/createUser";
+import EditUser from "./screens/Challenge4/editUser";
 
 const appReducers = combineReducers({
-  challenge35: challenge35Reducer,
+  challenge35Reducer: challenge35Reducer,
+  challenge4Reducer: challenge4Reducer,
+  
   field: FirstScreenReducer
 });
 
@@ -39,7 +43,7 @@ class App extends React.Component {
                 <NavLink className="mr-5" exact to="/challenge3">
                   Challenge 3
                 </NavLink>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
                 <Navbar.Collapse id="responsive-navbar-nav">
                   <Nav className="mr-auto">
                     <NavDropdown
@@ -63,12 +67,28 @@ class App extends React.Component {
                   </Nav>
                 </Navbar.Collapse>
 
-                {/* <NavLink exact to="/challenge35">
-                  Challenge 3.5
-                </NavLink> */}
-                <NavLink className="mr-5" exact to="/challenge4">
-                  Challenge 4
-                </NavLink>
+                <Navbar.Collapse id="responsive-navbar-nav">
+                  <Nav className="mr-auto">
+                    <NavDropdown
+                      className="mr-5"
+                      title="Challenge 4"
+                      id="collasible-nav-dropdown"
+                    >
+                      <NavLink
+                        className="dropdown-item text-black"
+                        to="/challenge4"
+                      >
+                        List of Users
+                      </NavLink>
+                      <NavLink
+                        className="dropdown-item text-black"
+                        to="/challenge4/new"
+                      >
+                        New User
+                      </NavLink>
+                    </NavDropdown>
+                  </Nav>
+                </Navbar.Collapse>
               </Navbar>
             </div>
             <div className="content">
@@ -79,6 +99,12 @@ class App extends React.Component {
                 <Route exact path="/challenge35" component={Challenge35} />
                 <Route exact path="/challenge35/new" component={CreateToDo} />
                 <Route exact path="/challenge4" component={Challenge4} />
+                <Route exact path="/challenge4/new" component={CreateUser} />
+                <Route
+                  path="/challenge4/:user_id/edit"
+                  exact
+                  component={EditUser}
+                />
               </Switch>
             </div>
           </div>

@@ -26,7 +26,7 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
   }
 
   public render(): JSX.Element {
-    const { toDos } = this.props;
+    const { toDos, editToDo, deleteToDo } = this.props;
     return (
       <div className="container">
         <h1>Challenge 3.5</h1>
@@ -44,8 +44,8 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
               </thead>
 
               <tbody>
-                {this.props.toDos &&
-                  this.props.toDos.map((todo: ToDo) => (
+                {toDos &&
+                  toDos.map((todo: ToDo) => (
                     <tr key={todo.todo_id}>
                       <td>{todo.todo_id}</td>
                       <td>{todo.todo_state ? "Done" : "To Do"}</td>
@@ -55,8 +55,7 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
                         <button
                           onClick={(): void => {
                             try {
-                              this.props.editToDo &&
-                                this.props.editToDo(todo.todo_id);
+                              editToDo && editToDo(todo.todo_id);
                             } catch {
                               alert("Error!");
                             }
@@ -69,8 +68,7 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
                         <button
                           onClick={(): void => {
                             if (todo.todo_state === true) {
-                              this.props.deleteToDo &&
-                                this.props.deleteToDo(todo.todo_id);
+                              deleteToDo && deleteToDo(todo.todo_id);
                             } else {
                               alert("Complete this To Do before deleting it!");
                             }
@@ -96,8 +94,7 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
 }
 
 const mapStateToProps = (state?: any) => ({
-  // toDos: state.Challenge35Reducer.toDos
-  toDos: state.challenge35.toDos
+  toDos: state.challenge35Reducer.toDos
 });
 
 const mapDispatchToProps = (dispatch: any): any =>

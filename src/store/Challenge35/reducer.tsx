@@ -6,17 +6,11 @@ export interface ToDo {
   todo_id: number;
 }
 
-// interface initiaLStateInteface {
-//   toDos: ToDo[];
-// }
-
-// const INITIAL_STATE: initiaLStateInteface = {
-//   toDos: []
-// };
-
-const INITIAL_STATE: {
+interface initiaLStateInteface {
   toDos: ToDo[];
-} = {
+}
+
+const INITIAL_STATE: initiaLStateInteface = {
   toDos: []
 };
 
