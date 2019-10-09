@@ -106,7 +106,7 @@ class App extends React.Component {
                 />
                 {/* /challenge4/:user_id/edit */}
                 <Route
-                  path="/challenge4/users/edit"
+                  path="/challenge4/user/:user_id/edit"
                   exact
                   component={EditUser}
                 />

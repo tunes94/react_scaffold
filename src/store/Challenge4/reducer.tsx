@@ -47,9 +47,22 @@ export default function challenge4Reducer(state = INITIAL_STATE, action: any) {
         return user;
       });
       return {
+        ...state,
         users: usersCopy
       };
     }
+    case Actions.DELETE_USER: {
+      let userSelected = action.payload.user_id;
+      let usersCopy: User[] = [...state.users];
+      let filteredUsers: User | any = usersCopy.filter(
+        user => user.user_id !== userSelected
+      );
+      return { users: filteredUsers };
+    }
+    case Actions.GET_USERS: {
+      return Object.assign({}, state);
+    }
+
     default:
       return state;
   }

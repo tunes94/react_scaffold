@@ -7,15 +7,13 @@ import { User } from "../../store/Challenge4/reducer";
 export interface EditUserProps {
   match?: any;
   history: any;
-  editUser?: (user_name: string, address: string, age: number) => void;
-  users?: User[] | any;
+  users: User[];
 }
 
 export interface InternalState {
   user_name: string;
   address: string;
   age: number;
-  users: User[];
 }
 
 class EditUser extends React.Component<EditUserProps, InternalState> {
@@ -24,39 +22,46 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
     this.state = {
       user_name: "",
       address: "",
-      age: 0,
-      users: []
+      age: 0
     };
   }
 
-  
-
   componentDidMount() {
-    // const userSelected: number = this.props.match.params.user_id;
-    // const { users } = this.props;
-    // let usersCopy = [...this.props.users];
-    // let filteredUser: User = usersCopy.find(
-    //   user => user.user_id === userSelected
-    // );
-    // this.setState({
-    //   user_name: filteredUser.user_name,
-    //   address: filteredUser.address,
-    //   age: filteredUser.age,
-    //   users: usersCopy
-    // });
+    const { users } = this.props;
+    const idSelected: number = parseInt(this.props.match.params.user_id);
+    let usersCopy = [...users];
+
+    let filteredUser: User | any = usersCopy.find(
+      user => user.user_id === idSelected
+    );
+
+    if (filteredUser) {
+      this.setState({
+        user_name: filteredUser.user_name,
+        address: filteredUser.address,
+        age: filteredUser.age
+      });
+    }
   }
+
+  handleChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({
+      ...this.state,
+      [evt.target.name]: evt.target.value
+    });
+  };
 
   render(): JSX.Element {
     const { user_name, address, age } = this.state;
     return (
       <div className="container shadow">
         <div className="form-group p-3">
-          <h3 className="m-3">Edit a user!</h3>
+          <h3 className="m-3">Edit this user:</h3>
 
           <input
             name="user_name"
             value={user_name}
-            //   onChange={this.handleChange}
+            onChange={this.handleChange}
             type="text"
             className="form-control col-6 m-3"
             aria-describedby="helpId"
@@ -66,7 +71,7 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
           <input
             name="address"
             value={address}
-            //   onChange={this.handleChange}
+            onChange={this.handleChange}
             type="text"
             className="form-control col-6 m-3"
             aria-describedby="helpId"
@@ -76,7 +81,7 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
           <input
             name="age"
             value={age}
-            //   onChange={this.handleChange}
+            onChange={this.handleChange}
             type="number"
             className="form-control col-6 m-3"
             aria-describedby="helpId"
@@ -95,7 +100,7 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
   }
 }
 
-const mapStateToProps = (state?: any) => ({
+const mapStateToProps = (state?: any): { users: User[] } => ({
   users: state.challenge4Reducer.users
 });
 

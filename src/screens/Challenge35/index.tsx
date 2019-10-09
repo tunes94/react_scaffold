@@ -31,7 +31,7 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
       <div className="container">
         <h1>Challenge 3.5</h1>
         {toDos.length ? (
-          <div className="container shadow mt-5">
+          <div className="container shadow mt-5 p-3">
             <h4>List of To Do's</h4>
             <Table style={{ marginTop: "50px" }} striped bordered hover>
               <thead>

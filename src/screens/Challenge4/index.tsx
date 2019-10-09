@@ -1,20 +1,14 @@
 import React from "react";
 import { User } from "../../store/Challenge4/reducer";
+import { deleteUser, editUser } from "../../store/Challenge4/action";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
 
 export interface Challenge4Props {
   history?: any;
   users: User[];
-  editUser?: (
-    user_name: string,
-    address: string,
-    age: number,
-    user_id: number
-  ) => void;
-  // deleUser?: (user_id: number) => void;
+  deleteUser?: (user_id: number) => void;
 }
 
 export interface InternalState {}
@@ -26,14 +20,17 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
   }
 
   public render(): JSX.Element {
-    const { users, editUser } = this.props;
+    const { users, deleteUser } = this.props;
     return (
       <div className="container">
         <h1>Challenge 4</h1>
         {users.length ? (
-          <div className="container shadow mt-5">
+          <div className="container shadow mt-5 p-3">
             <h4>List of Users</h4>
-            <Table style={{ marginTop: "50px" }} striped bordered hover>
+            <Table
+              style={{ marginTop: "50px" }}
+              className="striped bordered hover "
+            >
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -52,44 +49,25 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
                       <td>{user.age}</td>
 
                       <td>
-                        <Link
-                          to={{
-                            pathname: "/challenge4/users/edit",
-                            state: {
-                              user: user
-                            }
-                          }}
-                          className="btn btn-dark"
-                        >
-                          Edit
-                        </Link>
-
-                        {/* <button
-                          // onClick={() =>
-                          //   this.props.history.push(
-                          //     `/challenge4/${user.user_id}/edit`
-                          //   )
-                          // }
-                          // onClick={(): void => {
-                          //   try {
-                          //     editUser && editUser(user.user_name, user.user.user_id);
-                          //   } catch {
-                          //     alert("Error!");
-                          //   }
-                          // }}
+                        <button
+                          onClick={() =>
+                            this.props.history.push(
+                              `/challenge4/user/${user.user_id}/edit`
+                            )
+                          }
                           className="btn btn-dark col-3 ml-5"
                         >
                           Edit
-                        </button> */}
+                        </button>
 
                         <button
-                          // onClick={(): void => {
-                          //   if (todo.todo_state === true) {
-                          //     deleteToDo && deleteToDo(todo.todo_id);
-                          //   } else {
-                          //     alert("Complete this To Do before deleting it!");
-                          //   }
-                          // }}
+                          onClick={(): void => {
+                            try {
+                              deleteUser && deleteUser(user.user_id);
+                            } catch {
+                              alert("Error!");
+                            }
+                          }}
                           className="btn btn-danger col-2 ml-5"
                         >
                           Delete
@@ -108,14 +86,14 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
   }
 }
 // state?
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: any): { users: User[] } => ({
   users: state.challenge4Reducer.users
 });
 
-// const mapDispatchToProps = (dispatch: any): any =>
-//   bindActionCreators({ editToDo, deleteToDo }, dispatch);
+const mapDispatchToProps = (dispatch: any): any =>
+  bindActionCreators({ deleteUser, editUser }, dispatch);
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Challenge4);
