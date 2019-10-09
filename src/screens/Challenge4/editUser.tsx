@@ -8,12 +8,19 @@ export interface EditUserProps {
   match?: any;
   history: any;
   users: User[];
+  editUser?: (
+    user_name: string,
+    address: string,
+    age: number,
+    user_id: number
+  ) => void;
 }
 
 export interface InternalState {
   user_name: string;
   address: string;
   age: number;
+  user_id: number;
 }
 
 class EditUser extends React.Component<EditUserProps, InternalState> {
@@ -22,7 +29,8 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
     this.state = {
       user_name: "",
       address: "",
-      age: 0
+      age: 0,
+      user_id: 0
     };
   }
 
@@ -39,7 +47,8 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
       this.setState({
         user_name: filteredUser.user_name,
         address: filteredUser.address,
-        age: filteredUser.age
+        age: filteredUser.age,
+        user_id: idSelected
       });
     }
   }
@@ -52,48 +61,66 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
   };
 
   render(): JSX.Element {
-    const { user_name, address, age } = this.state;
+    const { user_name, address, age, user_id } = this.state;
+    const { editUser, history } = this.props;
     return (
       <div className="container shadow">
-        <div className="form-group p-3">
-          <h3 className="m-3">Edit this user:</h3>
+        <h3 className="m-3">Edit this user:</h3>
+        <div className="form-group">
+          <div className="row border p-2 shadow">
+            <label className="col-3 m-3">User name:</label>
+            <input
+              name="user_name"
+              value={user_name}
+              onChange={this.handleChange}
+              type="text"
+              className="form-control col-7 m-3"
+              aria-describedby="helpId"
+              placeholder="User Name"
+            ></input>
 
-          <input
-            name="user_name"
-            value={user_name}
-            onChange={this.handleChange}
-            type="text"
-            className="form-control col-6 m-3"
-            aria-describedby="helpId"
-            placeholder="User Name"
-          ></input>
+            <label className="col-3 m-3">User address:</label>
+            <input
+              name="address"
+              value={address}
+              onChange={this.handleChange}
+              type="text"
+              className="form-control col-7 m-3"
+              aria-describedby="helpId"
+              placeholder="User Address"
+            ></input>
+            <label className="col-3 m-3">User age:</label>
+            <input
+              name="age"
+              value={age}
+              onChange={this.handleChange}
+              type="number"
+              className="form-control col-7 m-3"
+              aria-describedby="helpId"
+              placeholder="User Age"
+            ></input>
 
-          <input
-            name="address"
-            value={address}
-            onChange={this.handleChange}
-            type="text"
-            className="form-control col-6 m-3"
-            aria-describedby="helpId"
-            placeholder="User Address"
-          ></input>
-
-          <input
-            name="age"
-            value={age}
-            onChange={this.handleChange}
-            type="number"
-            className="form-control col-6 m-3"
-            aria-describedby="helpId"
-            placeholder="User Age"
-          ></input>
-
-          <button
-            //   onClick={this.editUser}
-            className="btn btn-outline-primary ml-3 mt-1 "
-          >
-            Edit
-          </button>
+            <button
+              onClick={(): void => {
+                try {
+                  editUser &&
+                    editUser(
+                      user_name as string,
+                      address as string,
+                      age as number,
+                      user_id as number
+                    );
+                  history.goBack();
+                } catch {
+                  alert("Error!");
+                }
+              }}
+              type="button"
+              className="btn btn-outline-dark col-2 ml-5 mb-2"
+            >
+              Edit
+            </button>
+          </div>
         </div>
       </div>
     );

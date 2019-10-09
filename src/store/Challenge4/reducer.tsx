@@ -12,7 +12,14 @@ interface initiaLStateInteface {
 }
 
 const INITIAL_STATE: initiaLStateInteface = {
-  users: []
+  users: [
+    {
+      user_name: "Ruben",
+      address: "Rua Joaquim",
+      age: 55,
+      user_id: 1
+    }
+  ]
 };
 
 export default function challenge4Reducer(state = INITIAL_STATE, action: any) {
@@ -31,6 +38,7 @@ export default function challenge4Reducer(state = INITIAL_STATE, action: any) {
       };
     }
     case Actions.EDIT_USER: {
+      alert("User updated with sucess!");
       let idSelected = action.payload.user_id;
       let newName = action.payload.user_name;
       let newAddress = action.payload.address;
@@ -43,6 +51,7 @@ export default function challenge4Reducer(state = INITIAL_STATE, action: any) {
           user.user_name = newName;
           user.address = newAddress;
           user.age = newAge;
+          user.user_id = idSelected;
         }
         return user;
       });
@@ -59,10 +68,6 @@ export default function challenge4Reducer(state = INITIAL_STATE, action: any) {
       );
       return { users: filteredUsers };
     }
-    case Actions.GET_USERS: {
-      return Object.assign({}, state);
-    }
-
     default:
       return state;
   }

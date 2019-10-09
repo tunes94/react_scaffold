@@ -14,7 +14,7 @@ export const editUser = (
   return action(Actions.EDIT_USER, { user_name, address, age, user_id });
 };
 
-// export const editUser = (user: User) => {
+// export const editUser44 = (user: User) => {
 //   return action(Actions.EDIT_USER, { user });
 // };
 
