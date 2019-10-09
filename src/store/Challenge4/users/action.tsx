@@ -14,10 +14,6 @@ export const editUser = (
   return action(Actions.EDIT_USER, { user_name, address, age, user_id });
 };
 
-// export const editUser44 = (user: User) => {
-//   return action(Actions.EDIT_USER, { user });
-// };
-
 export const deleteUser = (user_id: number) => {
   return action(Actions.DELETE_USER, { user_id });
 };
