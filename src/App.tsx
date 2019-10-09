@@ -12,7 +12,7 @@ import Challenge35 from "./screens/Challenge35";
 import CreateToDo from "./screens/Challenge35/createTodo";
 import Challenge4 from "./screens/Challenge4";
 import challenge35Reducer from "./store/Challenge35/reducer";
-import challenge4Reducer from "./store/Challenge4/reducer";
+import challenge4Reducer from "./store/Challenge4/users/reducer";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import CreateUser from "./screens/Challenge4/createUser";
 import EditUser from "./screens/Challenge4/editUser";

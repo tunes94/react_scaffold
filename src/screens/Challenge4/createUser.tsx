@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addUser } from "../../store/Challenge4/action";
+import { addUser } from "../../store/Challenge4/users/action";
 
 export interface CreateUserProps {
   addUser?: (user_name: string, address: string, age: number) => void;

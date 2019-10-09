@@ -1,6 +1,6 @@
 import React from "react";
-import { User } from "../../store/Challenge4/reducer";
-import { deleteUser, editUser } from "../../store/Challenge4/action";
+import { User } from "../../store/Challenge4/users/reducer";
+import { deleteUser, editUser } from "../../store/Challenge4/users/action";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { bindActionCreators } from "redux";

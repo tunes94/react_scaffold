@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { editUser } from "../../store/Challenge4/action";
-import { User } from "../../store/Challenge4/reducer";
+import { editUser } from "../../store/Challenge4/users/action";
+import { User } from "../../store/Challenge4/users/reducer";
 
 export interface EditUserProps {
   match?: any;
