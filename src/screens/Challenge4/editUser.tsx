@@ -2,7 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { editUser } from "../../store/Challenge4/users/action";
+import { genericAlert } from "../../store/Challenge4/alerts/action";
 import { User } from "../../store/Challenge4/users/reducer";
+import showAlert from "./hoc/hocAlert";
 
 export interface EditUserProps {
   match?: any;
@@ -14,6 +16,7 @@ export interface EditUserProps {
     age: number,
     user_id: number
   ) => void;
+  genericAlert?: (text: string, type: string) => void;
 }
 
 export interface InternalState {
@@ -60,9 +63,37 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
     });
   };
 
-  render(): JSX.Element {
+  checkEdit = (): void => {
     const { user_name, address, age, user_id } = this.state;
-    const { editUser, history } = this.props;
+    const { editUser, history, genericAlert } = this.props;
+    if (this.state.user_name === "" || address === "" || age === 0) {
+      genericAlert &&
+        genericAlert(
+          "Please make sure you fill the form before submitting it...",
+          "warning"
+        );
+    } else {
+      try {
+        editUser &&
+          editUser(
+            user_name as string,
+            address as string,
+            age as number,
+            user_id as number
+          );
+        genericAlert && genericAlert("User updated with success!", "success");
+        setTimeout(function() {
+          history.goBack();
+        }, 500);
+      } catch {
+        genericAlert && genericAlert("Error!", "danger");
+      }
+    }
+  };
+
+  render(): JSX.Element {
+    const { user_name, address, age } = this.state;
+
     return (
       <div className="container shadow">
         <h3 className="m-3">Edit this user:</h3>
@@ -102,18 +133,7 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
 
             <button
               onClick={(): void => {
-                try {
-                  editUser &&
-                    editUser(
-                      user_name as string,
-                      address as string,
-                      age as number,
-                      user_id as number
-                    );
-                  history.goBack();
-                } catch {
-                  alert("Error!");
-                }
+                this.checkEdit();
               }}
               type="button"
               className="btn btn-outline-dark col-2 ml-5 mb-2"
@@ -132,9 +152,9 @@ const mapStateToProps = (state?: any): { users: User[] } => ({
 });
 
 const mapDispatchToProps = (dispatch: any): any =>
-  bindActionCreators({ editUser }, dispatch);
+  bindActionCreators({ editUser, genericAlert }, dispatch);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditUser);
+)(showAlert(EditUser));

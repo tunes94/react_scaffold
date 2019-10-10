@@ -2,9 +2,13 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addUser } from "../../store/Challenge4/users/action";
+import showAlert from "./hoc/hocAlert";
+import { genericAlert } from "../../store/Challenge4/alerts/action";
 
 export interface CreateUserProps {
   addUser?: (user_name: string, address: string, age: number) => void;
+  genericAlert?: (text: string, type: string) => void;
+  history?: any;
 }
 
 export interface InternalState {
@@ -28,6 +32,26 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
       ...this.state,
       [evt.target.name]: evt.target.value
     });
+  };
+
+  checkAdd = (): void => {
+    const { user_name, address, age } = this.state;
+    const { addUser, genericAlert } = this.props;
+    if (user_name === "" || address === "" || age === 0) {
+      genericAlert &&
+        genericAlert("Please make sure you fill the form before submitting it...", "warning");
+    } else {
+      try {
+        addUser && addUser(user_name, address, age);
+        genericAlert &&
+          genericAlert("New user created with success!!", "success");
+        setTimeout(() => {
+          this.props.history.goBack();
+        }, 600);
+      } catch {
+        genericAlert && genericAlert("Something went wrong", "danger");
+      }
+    }
   };
 
   render(): JSX.Element {
@@ -73,13 +97,7 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
 
             <button
               onClick={(): void => {
-                try {
-                  this.props.addUser &&
-                    this.props.addUser(user_name, address, age);
-                  alert("New user created with success!!");
-                } catch {
-                  alert("Error!");
-                }
+                this.checkAdd();
               }}
               type="button"
               className="btn btn-outline-dark mb-3 ml-5 col-1"
@@ -94,9 +112,9 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
 }
 
 const mapDispatchToProps = (dispatch: any): any =>
-  bindActionCreators({ addUser }, dispatch);
+  bindActionCreators({ addUser, genericAlert }, dispatch);
 
 export default connect(
   null,
   mapDispatchToProps
-)(CreateUser);
+)(showAlert(CreateUser));

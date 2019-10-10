@@ -13,6 +13,7 @@ import CreateToDo from "./screens/Challenge35/createTodo";
 import Challenge4 from "./screens/Challenge4";
 import challenge35Reducer from "./store/Challenge35/reducer";
 import challenge4Reducer from "./store/Challenge4/users/reducer";
+import alertsReducer from "./store/Challenge4/alerts/reducer";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import CreateUser from "./screens/Challenge4/createUser";
 import EditUser from "./screens/Challenge4/editUser";
@@ -20,7 +21,7 @@ import EditUser from "./screens/Challenge4/editUser";
 const appReducers = combineReducers({
   challenge35Reducer: challenge35Reducer,
   challenge4Reducer: challenge4Reducer,
-
+  alertsReducer : alertsReducer,
   field: FirstScreenReducer
 });
 

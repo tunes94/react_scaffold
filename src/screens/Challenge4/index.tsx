@@ -79,7 +79,7 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
             </Table>
           </div>
         ) : (
-          <h5 className="mt-5">There are no users show at the moment...</h5>
+          <h5 className="mt-5">There are no users to show at the moment...</h5>
         )}
       </div>
     );

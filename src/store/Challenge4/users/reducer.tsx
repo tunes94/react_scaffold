@@ -38,7 +38,6 @@ export default function challenge4Reducer(state = INITIAL_STATE, action: any) {
       };
     }
     case Actions.EDIT_USER: {
-      alert("User updated with sucess!");
       let idSelected = action.payload.user_id;
       let newName = action.payload.user_name;
       let newAddress = action.payload.address;
