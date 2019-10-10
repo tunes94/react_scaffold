@@ -48,9 +48,6 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
         addUser && addUser(user_name, address, age);
         genericAlert &&
           genericAlert("New user created with success!!", "success");
-        setTimeout(() => {
-          this.props.history.goBack();
-        }, 600);
       } catch {
         genericAlert && genericAlert("Something went wrong", "danger");
       }
