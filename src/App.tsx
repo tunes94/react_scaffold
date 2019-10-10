@@ -21,7 +21,7 @@ import EditUser from "./screens/Challenge4/editUser";
 const appReducers = combineReducers({
   challenge35Reducer: challenge35Reducer,
   challenge4Reducer: challenge4Reducer,
-  alertsReducer : alertsReducer,
+  alertsReducer: alertsReducer,
   field: FirstScreenReducer
 });
 
@@ -105,7 +105,6 @@ class App extends React.Component {
                   path="/challenge4/user/new"
                   component={CreateUser}
                 />
-                {/* /challenge4/:user_id/edit */}
                 <Route
                   path="/challenge4/user/:user_id/edit"
                   exact

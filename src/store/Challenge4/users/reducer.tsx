@@ -3,7 +3,7 @@ import { Actions } from "./types";
 export interface User {
   user_name: string;
   address: string;
-  age: number;
+  age: number | string;
   user_id: number;
 }
 

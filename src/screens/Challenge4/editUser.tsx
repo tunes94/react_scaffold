@@ -13,7 +13,7 @@ export interface EditUserProps {
   editUser?: (
     user_name: string,
     address: string,
-    age: number,
+    age: number | string,
     user_id: number
   ) => void;
   genericAlert?: (text: string, type: string) => void;
@@ -22,7 +22,7 @@ export interface EditUserProps {
 export interface InternalState {
   user_name: string;
   address: string;
-  age: number;
+  age: number | string;
   user_id: number;
 }
 
@@ -32,7 +32,7 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
     this.state = {
       user_name: "",
       address: "",
-      age: 0,
+      age: "",
       user_id: 0
     };
   }
@@ -66,7 +66,7 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
   checkEdit = (): void => {
     const { user_name, address, age, user_id } = this.state;
     const { editUser, history, genericAlert } = this.props;
-    if (this.state.user_name === "" || address === "" || age === 0) {
+    if (this.state.user_name === "" || address === "" || age === "") {
       genericAlert &&
         genericAlert(
           "Please make sure you fill the form before submitting it...",

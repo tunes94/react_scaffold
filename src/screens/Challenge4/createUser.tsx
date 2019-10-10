@@ -6,7 +6,7 @@ import showAlert from "./hoc/hocAlert";
 import { genericAlert } from "../../store/Challenge4/alerts/action";
 
 export interface CreateUserProps {
-  addUser?: (user_name: string, address: string, age: number) => void;
+  addUser?: (user_name: string, address: string, age: number | string) => void;
   genericAlert?: (text: string, type: string) => void;
   history?: any;
 }
@@ -14,7 +14,7 @@ export interface CreateUserProps {
 export interface InternalState {
   user_name: string;
   address: string;
-  age: number;
+  age: number | string;
 }
 
 class CreateUser extends React.Component<CreateUserProps, InternalState> {
@@ -23,7 +23,7 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
     this.state = {
       user_name: "",
       address: "",
-      age: 0
+      age: ""
     };
   }
 
@@ -37,7 +37,7 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
   checkAdd = (): void => {
     const { user_name, address, age } = this.state;
     const { addUser, genericAlert } = this.props;
-    if (user_name === "" || address === "" || age === 0) {
+    if (user_name === "" || address === "" || age === "") {
       genericAlert &&
         genericAlert(
           "Please make sure you fill the form before submitting it...",
