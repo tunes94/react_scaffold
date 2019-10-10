@@ -39,7 +39,10 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
     const { addUser, genericAlert } = this.props;
     if (user_name === "" || address === "" || age === 0) {
       genericAlert &&
-        genericAlert("Please make sure you fill the form before submitting it...", "warning");
+        genericAlert(
+          "Please make sure you fill the form before submitting it...",
+          "warning"
+        );
     } else {
       try {
         addUser && addUser(user_name, address, age);
@@ -84,7 +87,7 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
               placeholder="Type some text"
             ></input>
 
-            <label className="col-2 ml-2 mt-3 mb-3 mr-1">User name:</label>
+            <label className="col-2 ml-2 mt-3 mb-3 mr-1">Age:</label>
             <input
               name="age"
               value={age}
