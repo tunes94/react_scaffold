@@ -1,28 +1,22 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { ToDo } from "../../store/Challenge35/reducer";
 import { Table } from "react-bootstrap";
 import { bindActionCreators } from "redux";
 import { editToDo, deleteToDo } from "../../store/Challenge35/action";
 
 export interface Challenge35Props {
-  toDos: ToDo[];
+  toDos?: ToDo[];
   editToDo?: (todo_id: number) => void;
   deleteToDo?: (todo_id: number) => void;
-  // text: string;
-  // addToDo?: (text: string) => void;
 }
 
-export interface InternalState {
-  // text: string;
-}
+export interface InternalState {}
 
 class Challenge35 extends React.Component<Challenge35Props, InternalState> {
   constructor(props: Challenge35Props) {
     super(props);
-    this.state = {
-      // text: ""
-    };
+    this.state = {};
   }
 
   public render(): JSX.Element {
@@ -30,7 +24,7 @@ class Challenge35 extends React.Component<Challenge35Props, InternalState> {
     return (
       <div className="container">
         <h1>Challenge 3.5</h1>
-        {toDos.length ? (
+        {toDos && toDos.length ? (
           <div className="container shadow mt-5 p-3">
             <h4>List of To Do's</h4>
             <Table style={{ marginTop: "50px" }} striped bordered hover>

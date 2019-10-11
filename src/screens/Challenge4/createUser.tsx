@@ -3,11 +3,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addUser } from "../../store/Challenge4/users/action";
 import showAlert from "./hoc/hocAlert";
-import { genericAlert } from "../../store/Challenge4/alerts/action";
+import {
+  genericAlert,
+  removeAlerts
+} from "../../store/Challenge4/alerts/action";
 
 export interface CreateUserProps {
   addUser?: (user_name: string, address: string, age: number | string) => void;
   genericAlert?: (text: string, type: string) => void;
+  removeAlerts?: () => void;
   history?: any;
 }
 
@@ -56,10 +60,19 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
 
   render(): JSX.Element {
     const handleChange = this.handleChange;
+    const { removeAlerts } = this.props;
     const { user_name, address, age } = this.state;
     return (
       <div className="container shadow">
         <h3 className="m-3">Add a new user!</h3>
+        <button
+          className="btn btn-outline-dark col-3 mb-3"
+          onClick={(): void => {
+            removeAlerts && removeAlerts();
+          }}
+        >
+          Clear all alerts
+        </button>
         <div className="form-group ">
           <div className="row border p-2 shadow">
             <label className="col-2 ml-2 mt-3 mb-3 mr-1">User name:</label>
@@ -112,7 +125,7 @@ class CreateUser extends React.Component<CreateUserProps, InternalState> {
 }
 
 const mapDispatchToProps = (dispatch: any): any =>
-  bindActionCreators({ addUser, genericAlert }, dispatch);
+  bindActionCreators({ addUser, genericAlert, removeAlerts }, dispatch);
 
 export default connect(
   null,

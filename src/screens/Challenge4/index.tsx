@@ -1,7 +1,10 @@
 import React from "react";
 import { User } from "../../store/Challenge4/users/reducer";
 import { deleteUser, editUser } from "../../store/Challenge4/users/action";
-import { genericAlert } from "../../store/Challenge4/alerts/action";
+import {
+  genericAlert,
+  removeAlerts
+} from "../../store/Challenge4/alerts/action";
 import { connect } from "react-redux";
 import { Table } from "react-bootstrap";
 import { bindActionCreators } from "redux";
@@ -12,6 +15,7 @@ export interface Challenge4Props {
   users: User[];
   deleteUser?: (user_id: number) => void;
   genericAlert?: (text: string, type: string) => void;
+  removeAlerts?: () => void;
 }
 
 export interface InternalState {}
@@ -23,13 +27,21 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
   }
 
   public render(): JSX.Element {
-    const { users, deleteUser, genericAlert } = this.props;
+    const { users, deleteUser, genericAlert, removeAlerts } = this.props;
     return (
       <div className="container">
         <h1>Challenge 4</h1>
         {users.length ? (
           <div className="container shadow mt-5 p-3">
             <h4>List of Users</h4>
+            <button
+              className="btn btn-outline-dark col-3"
+              onClick={(): void => {
+                removeAlerts && removeAlerts();
+              }}          
+            >
+              Clear all alerts
+            </button>
             <Table
               style={{ marginTop: "50px" }}
               className="striped bordered hover "
@@ -103,7 +115,10 @@ const mapStateToProps = (state: any): { users: User[] } => ({
 });
 
 const mapDispatchToProps = (dispatch: any): any =>
-  bindActionCreators({ deleteUser, editUser, genericAlert }, dispatch);
+  bindActionCreators(
+    { deleteUser, editUser, genericAlert, removeAlerts },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,

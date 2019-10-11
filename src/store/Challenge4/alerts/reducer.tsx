@@ -19,8 +19,9 @@ export default function alertsReducer(state = INITIAL_STATE, action: any) {
     case Actions.GENERIC_ALERT: {
       const text: string = action.payload.text;
       const type: string = action.payload.type;
-      return {
+      return {     
         alerts: [
+          ...state.alerts,
           {
             text: text,
             type: type,
@@ -31,6 +32,16 @@ export default function alertsReducer(state = INITIAL_STATE, action: any) {
     }
     case Actions.REMOVE_ALERTS: {
       return { alerts: [] };
+    }
+    case Actions.REMOVE_SPECIFIC_ALERT: {
+      let idSelected = action.payload.id;
+      let alertsCopy: Alert[] = [...state.alerts];
+      let filteredAlert: Alert | any = alertsCopy.filter(
+        alert => alert.id !== idSelected
+      );
+      console.log(...state.alerts);
+
+      return { alerts: filteredAlert };
     }
     default:
       return state;

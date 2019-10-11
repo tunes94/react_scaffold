@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "24.0.13",
     "@types/node": "12.0.4",
     "@types/react": "16.8.19",
@@ -11,8 +12,6 @@
     "@types/react-redux": "^7.0.9",
     "@types/react-router-dom": "^4.3.5",
     "bootstrap": "^4.3.1",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.8.0",
     "install": "^0.12.2",
     "npm": "^6.11.3",
     "react": "^16.8.6",
@@ -47,8 +46,10 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.8",
     "@types/redux-mock-store": "^1.0.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.0",
+    "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.3"
   }
 }

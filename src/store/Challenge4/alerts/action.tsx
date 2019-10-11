@@ -8,3 +8,7 @@ export const genericAlert = (text: string, type: string) => {
 export const removeAlerts = () => {
   return action(Actions.REMOVE_ALERTS);
 };
+
+export const removeSpecificAlert = (id: number) => {
+  return action(Actions.REMOVE_SPECIFIC_ALERT, { id });
+};

@@ -25,6 +25,9 @@ const appReducers = combineReducers({
   field: FirstScreenReducer
 });
 
+// context={MyContext}
+// const MyContext = React.createContext();
+
 const store = createStore(appReducers, composeWithDevTools());
 
 class App extends React.Component {

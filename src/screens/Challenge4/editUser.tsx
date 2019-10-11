@@ -2,7 +2,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { editUser } from "../../store/Challenge4/users/action";
-import { genericAlert } from "../../store/Challenge4/alerts/action";
+import {
+  genericAlert,
+  removeAlerts
+} from "../../store/Challenge4/alerts/action";
 import { User } from "../../store/Challenge4/users/reducer";
 import showAlert from "./hoc/hocAlert";
 
@@ -17,6 +20,7 @@ export interface EditUserProps {
     user_id: number
   ) => void;
   genericAlert?: (text: string, type: string) => void;
+  removeAlerts?: () => void;
 }
 
 export interface InternalState {
@@ -93,10 +97,19 @@ class EditUser extends React.Component<EditUserProps, InternalState> {
 
   render(): JSX.Element {
     const { user_name, address, age } = this.state;
+    const { removeAlerts } = this.props;
 
     return (
       <div className="container shadow">
         <h3 className="m-3">Edit this user:</h3>
+        <button
+          className="btn btn-outline-dark col-3 mb-3"
+          onClick={(): void => {
+            removeAlerts && removeAlerts();
+          }}
+        >
+          Clear all alerts
+        </button>
         <div className="form-group">
           <div className="row border p-2 shadow">
             <label className="col-3 m-3">User name:</label>
@@ -152,7 +165,7 @@ const mapStateToProps = (state?: any): { users: User[] } => ({
 });
 
 const mapDispatchToProps = (dispatch: any): any =>
-  bindActionCreators({ editUser, genericAlert }, dispatch);
+  bindActionCreators({ editUser, genericAlert, removeAlerts }, dispatch);
 
 export default connect(
   mapStateToProps,
