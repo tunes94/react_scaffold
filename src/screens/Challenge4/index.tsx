@@ -31,17 +31,18 @@ class Challenge4 extends React.Component<Challenge4Props, InternalState> {
     return (
       <div className="container">
         <h1>Challenge 4</h1>
+        <button
+          className="btn btn-outline-dark col-3"
+          onClick={(): void => {
+            removeAlerts && removeAlerts();
+          }}
+        >
+          Clear all alerts
+        </button>
         {users.length ? (
           <div className="container shadow mt-5 p-3">
             <h4>List of Users</h4>
-            <button
-              className="btn btn-outline-dark col-3"
-              onClick={(): void => {
-                removeAlerts && removeAlerts();
-              }}          
-            >
-              Clear all alerts
-            </button>
+
             <Table
               style={{ marginTop: "50px" }}
               className="striped bordered hover "
