@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, Provider } from "react-redux";
+import { connect } from "react-redux";
 import { ToDo } from "../../store/Challenge35/reducer";
 import { Table } from "react-bootstrap";
 import { bindActionCreators } from "redux";
