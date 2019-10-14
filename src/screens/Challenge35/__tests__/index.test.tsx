@@ -31,27 +31,27 @@ describe("<Challenge3.5 />", () => {
   const wrapper = buildTestableComponent(<Challenge35 />);
   
   beforeEach( () =>{
-    console.log("Just a test");
+    console.log("Just a test - before each test");
   });
 
   it("should renders screen", (): void => {
-    // const wrapper = buildTestableComponent(<Challenge35 />);
-    expect(wrapper).toBeDefined();
-   
+    expect(wrapper).toBeDefined(); 
   });
 
   it.skip("should skip",(): void=> {
    expect(40 +2).toEqual(42);
   });
 
-  // it("async test1",done => {
-  //   setTimeout(done,100);
-  //  });
+  it("async test1",done => {
+    setTimeout(done,100);
+   });
 
    it("async test2", () => {
      return new Promise(
       resolve => setTimeout(resolve,100))
    });
 
-
+   it("should match snapshot", (): void => {
+    expect(wrapper).toMatchSnapshot();
+  });
 });
