@@ -28,8 +28,20 @@ const buildTestableComponent = (component: JSX.Element, state = testState) =>
   mount(<Provider store={mockStore(testState)}>{component}</Provider>);
 
 describe("<Challenge3.5 />", () => {
+
+  beforeEach( () =>{
+    console.log("Just a test");
+  });
+
   it("should renders screen", (): void => {
     const wrapper = buildTestableComponent(<Challenge35 />);
     expect(wrapper).toBeDefined();
+   
   });
+
+  it.skip("should fail",(): void=> {
+   expect(40 +2).toEqual(42);
+  });
+
+
 });
