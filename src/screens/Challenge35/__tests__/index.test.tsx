@@ -28,20 +28,30 @@ const buildTestableComponent = (component: JSX.Element, state = testState) =>
   mount(<Provider store={mockStore(testState)}>{component}</Provider>);
 
 describe("<Challenge3.5 />", () => {
-
+  const wrapper = buildTestableComponent(<Challenge35 />);
+  
   beforeEach( () =>{
     console.log("Just a test");
   });
 
   it("should renders screen", (): void => {
-    const wrapper = buildTestableComponent(<Challenge35 />);
+    // const wrapper = buildTestableComponent(<Challenge35 />);
     expect(wrapper).toBeDefined();
    
   });
 
-  it.skip("should fail",(): void=> {
+  it.skip("should skip",(): void=> {
    expect(40 +2).toEqual(42);
   });
+
+  // it("async test1",done => {
+  //   setTimeout(done,100);
+  //  });
+
+   it("async test2", () => {
+     return new Promise(
+      resolve => setTimeout(resolve,100))
+   });
 
 
 });
